@@ -12,12 +12,16 @@
  */
 package org.eclipse.paho.android.service;
 
-import org.eclipse.paho.client.mqttv3.IMqttActionListener;
-import org.eclipse.paho.client.mqttv3.IMqttAsyncClient;
-import org.eclipse.paho.client.mqttv3.IMqttToken;
-import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.MqttSecurityException;
-import org.eclipse.paho.client.mqttv3.internal.wire.MqttWireMessage;
+
+import org.eclipse.paho.mqttv5.client.IMqttAsyncClient;
+import org.eclipse.paho.mqttv5.client.IMqttToken;
+import org.eclipse.paho.mqttv5.client.MqttActionListener;
+import org.eclipse.paho.mqttv5.client.MqttAsyncClient;
+import org.eclipse.paho.mqttv5.common.MqttException;
+import org.eclipse.paho.mqttv5.common.MqttMessage;
+import org.eclipse.paho.mqttv5.common.MqttSecurityException;
+import org.eclipse.paho.mqttv5.common.packet.MqttProperties;
+import org.eclipse.paho.mqttv5.common.packet.MqttWireMessage;
 
 /**
  * <p>
@@ -27,7 +31,7 @@ import org.eclipse.paho.client.mqttv3.internal.wire.MqttWireMessage;
 
 class MqttTokenAndroid implements IMqttToken {
 
-  private IMqttActionListener listener;
+  private MqttActionListener listener;
 
   private volatile boolean isComplete;
 
@@ -53,7 +57,7 @@ class MqttTokenAndroid implements IMqttToken {
    * @param listener optional listener that will be notified when the action completes. Use null if not required.
    */
   MqttTokenAndroid(MqttAndroidClient client,
-      Object userContext, IMqttActionListener listener) {
+      Object userContext, MqttActionListener listener) {
     this(client, userContext, listener, null);
   }
 
@@ -66,7 +70,7 @@ class MqttTokenAndroid implements IMqttToken {
    * @param topics topics to subscribe to, which can include wildcards.
    */
   MqttTokenAndroid(MqttAndroidClient client,
-      Object userContext, IMqttActionListener listener, String[] topics) {
+      Object userContext, MqttActionListener listener, String[] topics) {
     this.client = client;
     this.userContext = userContext;
     this.listener = listener;
@@ -74,7 +78,7 @@ class MqttTokenAndroid implements IMqttToken {
   }
 
   /**
-   * @see org.eclipse.paho.client.mqttv3.IMqttToken#waitForCompletion()
+   * @see IMqttToken#waitForCompletion()
    */
   @Override
   public void waitForCompletion() throws MqttException, MqttSecurityException {
@@ -92,7 +96,7 @@ class MqttTokenAndroid implements IMqttToken {
   }
 
   /**
-   * @see org.eclipse.paho.client.mqttv3.IMqttToken#waitForCompletion(long)
+   * @see IMqttToken#waitForCompletion(long)
    */
   @Override
   public void waitForCompletion(long timeout) throws MqttException,
@@ -104,8 +108,8 @@ class MqttTokenAndroid implements IMqttToken {
       catch (InterruptedException e) {
         // do nothing
       }
-      if (!isComplete) {
-        throw new MqttException(MqttException.REASON_CODE_CLIENT_TIMEOUT);
+      if (!isComplete) { //v3 use REASON_CODE_CLIENT_TIMEOUT?
+        throw new MqttException(MqttException.REASON_CODE_CLIENT_EXCEPTION);
       }
       if (pendingException != null) {
         throw pendingException;
@@ -150,7 +154,7 @@ class MqttTokenAndroid implements IMqttToken {
   }
 
   /**
-   * @see org.eclipse.paho.client.mqttv3.IMqttToken#isComplete()
+   * @see IMqttToken#isComplete()
    */
   @Override
   public boolean isComplete() {
@@ -162,7 +166,7 @@ class MqttTokenAndroid implements IMqttToken {
   }
 
   /**
-   * @see org.eclipse.paho.client.mqttv3.IMqttToken#getException()
+   * @see IMqttToken#getException()
    */
   @Override
   public MqttException getException() {
@@ -174,31 +178,31 @@ class MqttTokenAndroid implements IMqttToken {
   }
 
   /**
-   * @see org.eclipse.paho.client.mqttv3.IMqttToken#getClient()
+   * @see IMqttToken#getClient()
    */
   @Override
-  public IMqttAsyncClient getClient() {
+  public MqttAsyncClient getClient() {
     return client;
   }
 
   /**
-   * @see org.eclipse.paho.client.mqttv3.IMqttToken#setActionCallback(IMqttActionListener)
+   * @see IMqttToken#setActionCallback(MqttActionListener)
    */
   @Override
-  public void setActionCallback(IMqttActionListener listener) {
+  public void setActionCallback(MqttActionListener listener) {
     this.listener = listener;
   }
 
   /**
-   * @see org.eclipse.paho.client.mqttv3.IMqttToken#getActionCallback()
+   * @see IMqttToken#getActionCallback()
    */
   @Override
-  public IMqttActionListener getActionCallback() {
+  public MqttActionListener getActionCallback() {
     return listener;
   }
 
   /**
-   * @see org.eclipse.paho.client.mqttv3.IMqttToken#getTopics()
+   * @see IMqttToken#getTopics()
    */
   @Override
   public String[] getTopics() {
@@ -206,7 +210,7 @@ class MqttTokenAndroid implements IMqttToken {
   }
 
   /**
-   * @see org.eclipse.paho.client.mqttv3.IMqttToken#setUserContext(Object)
+   * @see IMqttToken#setUserContext(Object)
    */
   @Override
   public void setUserContext(Object userContext) {
@@ -215,7 +219,7 @@ class MqttTokenAndroid implements IMqttToken {
   }
 
   /**
-   * @see org.eclipse.paho.client.mqttv3.IMqttToken#getUserContext()
+   * @see IMqttToken#getUserContext()
    */
   @Override
   public Object getUserContext() {
@@ -227,7 +231,7 @@ class MqttTokenAndroid implements IMqttToken {
   }
 
   /**
-   * @see org.eclipse.paho.client.mqttv3.IMqttToken#getMessageId()
+   * @see IMqttToken#getMessageId()
    */
   @Override
   public int getMessageId() {
@@ -238,7 +242,45 @@ class MqttTokenAndroid implements IMqttToken {
   public MqttWireMessage getResponse() {
     return delegate.getResponse();
   }
-  
+
+  /**
+   * @return the response wire message properties
+   */
+  @Override
+  public MqttProperties getResponseProperties() {
+    return delegate.getResponseProperties();
+  }
+
+  /**
+   * Returns the message associated with this token.
+   * <p>Until the message has been delivered, the message being delivered will
+   * be returned. Once the message has been delivered <code>null</code> will be
+   * returned.
+   *
+   * @return the message associated with this token or null if already delivered.
+   * @throws MqttException if there was a problem completing retrieving the message
+   */
+  @Override
+  public MqttMessage getMessage() throws MqttException {
+    return delegate.getMessage();
+  }
+
+  /**
+   * @return the request wire message
+   */
+  @Override
+  public MqttWireMessage getRequestMessage() {
+    return delegate.getRequestMessage();
+  }
+
+  /**
+   * @return the request wire message properties
+   */
+  @Override
+  public MqttProperties getRequestProperties() {
+    return delegate.getRequestProperties();
+  }
+
   @Override
   public boolean getSessionPresent() {
     return delegate.getSessionPresent();
@@ -248,5 +290,23 @@ class MqttTokenAndroid implements IMqttToken {
   public int[] getGrantedQos() {
     return delegate.getGrantedQos();
   }
-  
+
+  /**
+   * Returns a list of reason codes that were returned as a result of this token's action.
+   * You will receive reason codes from the following MQTT actions:
+   * <ul>
+   * <li>CONNECT - in the corresponding CONNACK Packet.</li>
+   * <li>PUBLISH - in the corresponding PUBACK, PUBREC, PUBCOMP, PUBREL packets</li>
+   * <li>SUBSCRIBE - in the corresponding SUBACK Packet.</li>
+   * <li>UNSUBSCRIBE - in the corresponding UNSUBACK Packet.</li>
+   * <li>AUTH - in the returned AUTH Packet.</li>
+   * </ul>
+   *
+   * @return the reason code(s) from the response for this token's action.
+   */
+  @Override
+  public int[] getReasonCodes() {
+    return delegate.getReasonCodes();
+  }
+
 }

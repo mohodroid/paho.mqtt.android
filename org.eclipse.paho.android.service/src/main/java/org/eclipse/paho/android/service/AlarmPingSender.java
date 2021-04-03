@@ -12,10 +12,6 @@
  */
 package org.eclipse.paho.android.service;
 
-import org.eclipse.paho.client.mqttv3.IMqttActionListener;
-import org.eclipse.paho.client.mqttv3.IMqttToken;
-import org.eclipse.paho.client.mqttv3.MqttPingSender;
-import org.eclipse.paho.client.mqttv3.internal.ClientComms;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
@@ -29,6 +25,11 @@ import android.os.Build;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.util.Log;
+
+import org.eclipse.paho.mqttv5.client.IMqttToken;
+import org.eclipse.paho.mqttv5.client.MqttActionListener;
+import org.eclipse.paho.mqttv5.client.MqttPingSender;
+import org.eclipse.paho.mqttv5.client.internal.ClientComms;
 
 /**
  * Default ping sender implementation on Android. It is based on AlarmManager.
@@ -151,7 +152,7 @@ class AlarmPingSender implements MqttPingSender {
 			// Assign new callback to token to execute code after PingResq
 			// arrives. Get another wakelock even receiver already has one,
 			// release it until ping response returns.
-			IMqttToken token = comms.checkForActivity(new IMqttActionListener() {
+			IMqttToken token = comms.checkForActivity(new MqttActionListener() {
 
 				@Override
 				public void onSuccess(IMqttToken asyncActionToken) {

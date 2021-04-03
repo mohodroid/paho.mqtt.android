@@ -4,6 +4,10 @@ buildscript {
     repositories {
         jcenter()
         mavenCentral()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
     }
     dependencies {
 	    classpath 'com.android.tools.build:gradle:2.2.3'
@@ -30,7 +34,7 @@ ext{
 
     mavenUrl = "https://repo.eclipse.org/content/repositories/paho-releases/"
 
-    supportLibVersion = '24.2.1'
+    supportLibVersion = '28.0.0'
 
 }
 
@@ -60,6 +64,10 @@ allprojects {
         jcenter()
         maven {
             url "file://$sdkDir/extras/android/m2repository/"
+        }
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
         }
     }
 
