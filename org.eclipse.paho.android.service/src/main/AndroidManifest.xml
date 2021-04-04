@@ -1,5 +1,5 @@
 <manifest
-    package="org.eclipse.paho.android.service">
+    package="com.mohdroid.mqttv5.client.service">
 
     <application>
     </application>

@@ -14,7 +14,7 @@ package org.eclipse.paho.android.sample.activity;
 
 import android.util.Log;
 
-import org.eclipse.paho.android.service.MqttTraceHandler;
+import com.mohdroid.mqttv5.client.service.MqttTraceHandler;
 
 class MqttTraceCallback implements MqttTraceHandler {
 

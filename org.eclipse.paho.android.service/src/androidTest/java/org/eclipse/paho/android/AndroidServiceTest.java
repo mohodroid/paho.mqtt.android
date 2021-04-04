@@ -4,15 +4,9 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import org.eclipse.paho.client.mqttv3.IMqttAsyncClient;
-import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
-import org.eclipse.paho.client.mqttv3.IMqttToken;
-import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
-
 import android.test.AndroidTestCase;
 
-import org.eclipse.paho.android.service.MqttAndroidClient;
+import com.mohdroid.mqttv5.client.service.MqttAndroidClient;
 
 import android.util.Log;
 

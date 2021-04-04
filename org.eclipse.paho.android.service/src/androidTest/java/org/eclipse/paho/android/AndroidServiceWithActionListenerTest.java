@@ -28,7 +28,8 @@ import android.os.IBinder;
 import android.test.ServiceTestCase;
 import android.util.Log;
 
-import org.eclipse.paho.android.service.MqttAndroidClient;
+import com.mohdroid.mqttv5.client.service.MqttAndroidClient;
+import com.mohdroid.mqttv5.client.service.MqttService;
 
 /**
  * @author Rhys
@@ -51,7 +52,7 @@ public class AndroidServiceWithActionListenerTest extends ServiceTestCase {
 
     public AndroidServiceWithActionListenerTest() {
         //noinspection unchecked
-        super(org.eclipse.paho.android.service.MqttService.class);
+        super(MqttService.class);
     }
 
     @Override

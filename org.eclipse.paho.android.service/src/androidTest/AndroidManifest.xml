@@ -13,7 +13,7 @@
 
     <application>
         <!-- Mqtt Service -->
-        <service android:name="org.eclipse.paho.android.service.MqttService" >
+        <service android:name="com.mohdroid.mqttv5.client.service.MqttService" >
         </service>
 
     </application>

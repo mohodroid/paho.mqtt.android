@@ -10,7 +10,7 @@
  * and the Eclipse Distribution License is available at 
  *   http://www.eclipse.org/org/documents/edl-v10.php.
  */
-package org.eclipse.paho.android.service;
+package com.mohdroid.mqttv5.client.service;
 
 import java.io.File;
 import java.util.Arrays;
@@ -18,10 +18,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.eclipse.paho.android.service.MessageStore.StoredMessage;
+import com.mohdroid.mqttv5.client.service.MessageStore.StoredMessage;
 import org.eclipse.paho.mqttv5.client.DisconnectedBufferOptions;
 import org.eclipse.paho.mqttv5.client.IMqttDeliveryToken;
-import org.eclipse.paho.mqttv5.client.IMqttMessageListener;
 import org.eclipse.paho.mqttv5.client.IMqttToken;
 import org.eclipse.paho.mqttv5.client.MqttActionListener;
 import org.eclipse.paho.mqttv5.client.MqttAsyncClient;

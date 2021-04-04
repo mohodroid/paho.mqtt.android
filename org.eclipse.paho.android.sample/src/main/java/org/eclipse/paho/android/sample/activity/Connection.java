@@ -3,8 +3,6 @@ package org.eclipse.paho.android.sample.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.Html;
-import android.text.Spanned;
 
 import org.eclipse.paho.android.sample.R;
 import org.eclipse.paho.android.sample.internal.IReceivedMessageListener;
@@ -12,7 +10,7 @@ import org.eclipse.paho.android.sample.internal.Persistence;
 import org.eclipse.paho.android.sample.internal.PersistenceException;
 import org.eclipse.paho.android.sample.model.ReceivedMessage;
 import org.eclipse.paho.android.sample.model.Subscription;
-import org.eclipse.paho.android.service.MqttAndroidClient;
+import com.mohdroid.mqttv5.client.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;

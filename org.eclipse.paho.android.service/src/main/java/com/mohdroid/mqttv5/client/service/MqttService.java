@@ -13,7 +13,7 @@
  * Contributors:
  *   James Sutton - isOnline Null Pointer (bug 473775)
  */
-package org.eclipse.paho.android.service;
+package com.mohdroid.mqttv5.client.service;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -44,7 +44,6 @@ import org.eclipse.paho.mqttv5.common.MqttException;
 import org.eclipse.paho.mqttv5.common.MqttMessage;
 import org.eclipse.paho.mqttv5.common.MqttPersistenceException;
 import org.eclipse.paho.mqttv5.common.MqttSecurityException;
-import org.eclipse.paho.mqttv5.common.packet.MqttProperties;
 
 /**
  * <p>
@@ -486,7 +485,7 @@ public class MqttService extends Service implements MqttTraceHandler {
      */
     public void subscribe(String clientHandle, String[] topicFilters, int[] qos, String invocationContext, String activityToken, IMqttMessageListener[] messageListeners) {
         MqttConnection client = getConnection(clientHandle);
-        client.subscribe(topicFilters, qos, invocationContext, activityToken, messageListeners);
+        client.subscribe(topicFilters, qos, invocationContext, activityToken);
     }
 
     /**

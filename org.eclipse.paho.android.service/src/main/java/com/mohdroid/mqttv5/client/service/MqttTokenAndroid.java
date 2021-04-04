@@ -10,10 +10,9 @@
  * and the Eclipse Distribution License is available at 
  *   http://www.eclipse.org/org/documents/edl-v10.php.
  */
-package org.eclipse.paho.android.service;
+package com.mohdroid.mqttv5.client.service;
 
 
-import org.eclipse.paho.mqttv5.client.IMqttAsyncClient;
 import org.eclipse.paho.mqttv5.client.IMqttToken;
 import org.eclipse.paho.mqttv5.client.MqttActionListener;
 import org.eclipse.paho.mqttv5.client.MqttAsyncClient;
