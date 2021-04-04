@@ -13,6 +13,7 @@
 package com.mohdroid.mqttv5.client.service;
 
 
+import org.eclipse.paho.mqttv5.client.IMqttAsyncClient;
 import org.eclipse.paho.mqttv5.client.IMqttToken;
 import org.eclipse.paho.mqttv5.client.MqttActionListener;
 import org.eclipse.paho.mqttv5.client.MqttAsyncClient;
@@ -38,7 +39,7 @@ class MqttTokenAndroid implements IMqttToken {
 
   private Object waitObject = new Object();
 
-  private MqttAndroidClient client;
+  private IMqttAsyncClient client;
 
   private Object userContext;
 
@@ -181,7 +182,7 @@ class MqttTokenAndroid implements IMqttToken {
    */
   @Override
   public MqttAsyncClient getClient() {
-    return client;
+    return (MqttAsyncClient) client;
   }
 
   /**

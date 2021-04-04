@@ -1,18 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 1999, 2016 IBM Corp.
- *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * and Eclipse Distribution License v1.0 which accompany this distribution.
- *
- * The Eclipse Public License is available at
- *    http://www.eclipse.org/legal/epl-v10.html
- * and the Eclipse Distribution License is available at
- *   http://www.eclipse.org/org/documents/edl-v10.php.
- *
- * Contributors:
- *   James Sutton - isOnline Null Pointer (bug 473775)
- */
 package com.mohdroid.mqttv5.client.service;
 
 import java.util.Map;
@@ -272,8 +257,7 @@ public class MqttService extends Service implements MqttTraceHandler {
                             Bundle dataBundle) {
         // Don't call traceDebug, as it will try to callbackToActivity leading
         // to recursion.
-        Intent callbackIntent = new Intent(
-                MqttServiceConstants.CALLBACK_TO_ACTIVITY);
+        Intent callbackIntent = new Intent(MqttServiceConstants.CALLBACK_TO_ACTIVITY);
         if (clientHandle != null) {
             callbackIntent.putExtra(
                     MqttServiceConstants.CALLBACK_CLIENT_HANDLE, clientHandle);
@@ -322,8 +306,7 @@ public class MqttService extends Service implements MqttTraceHandler {
                         String invocationContext, String activityToken)
             throws MqttSecurityException, MqttException {
         MqttConnection client = getConnection(clientHandle);
-        client.connect(connectOptions, null, activityToken);
-
+        client.connect(connectOptions, invocationContext, activityToken);
     }
 
     /**
@@ -373,15 +356,15 @@ public class MqttService extends Service implements MqttTraceHandler {
     /**
      * Disconnect from the server
      *
-     * @param clientHandle         identifies the MqttConnection to use
-     * @param quiesceTimeout       in milliseconds
-     * @param invocationContext    arbitrary data to be passed back to the application
-     * @param activityToken        arbitrary identifier to be passed back to the Activity
+     * @param clientHandle      identifies the MqttConnection to use
+     * @param quiesceTimeout    in milliseconds
+     * @param invocationContext arbitrary data to be passed back to the application
+     * @param activityToken     arbitrary identifier to be passed back to the Activity
      */
     public void disconnect(String clientHandle, long quiesceTimeout,
                            String invocationContext, String activityToken) {
         MqttConnection client = getConnection(clientHandle);
-        client.disconnect(quiesceTimeout, invocationContext, activityToken );
+        client.disconnect(quiesceTimeout, invocationContext, activityToken);
         connections.remove(clientHandle);
 
         // the activity has finished using us, so we can stop the service
@@ -525,6 +508,18 @@ public class MqttService extends Service implements MqttTraceHandler {
     public IMqttToken[] getPendingDeliveryTokens(String clientHandle) {
         MqttConnection client = getConnection(clientHandle);
         return client.getPendingDeliveryTokens();
+    }
+
+    /**
+     * Returns the current number of outgoing in-flight messages being sent by the
+     * client.
+     *
+     * @param clientHandle identifies the MqttConnection
+     * @return the current number of in-flight messages.
+     */
+    public int getInFlightMessageCount(String clientHandle) {
+        MqttConnection client = getConnection(clientHandle);
+        return client.getInFlightMessageCount();
     }
 
     /**
@@ -742,6 +737,7 @@ public class MqttService extends Service implements MqttTraceHandler {
             }
         }
     }
+
 
     /*
      * Called in response to a change in network connection - after losing a
