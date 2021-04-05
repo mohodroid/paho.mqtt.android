@@ -432,7 +432,7 @@ public class MqttAndroidClient extends BroadcastReceiver implements IMqttAsyncCl
     private void registerReceiver(BroadcastReceiver receiver) {
         IntentFilter filter = new IntentFilter();
         filter.addAction(MqttServiceConstants.CALLBACK_TO_ACTIVITY);
-//        LocalBroadcastManager.getInstance(myContext).registerReceiver(receiver, filter);
+        LocalBroadcastManager.getInstance(myContext).registerReceiver(receiver, filter);
         receiverRegistered = true;
     }
 
@@ -1749,7 +1749,7 @@ public class MqttAndroidClient extends BroadcastReceiver implements IMqttAsyncCl
     public void unregisterResources() {
         if (myContext != null && receiverRegistered) {
             synchronized (MqttAndroidClient.this) { // handle broadcast receiver
-//                LocalBroadcastManager.getInstance(myContext).unregisterReceiver(this);
+                LocalBroadcastManager.getInstance(myContext).unregisterReceiver(this);
                 receiverRegistered = false;
             }
             if (bindedService) {
