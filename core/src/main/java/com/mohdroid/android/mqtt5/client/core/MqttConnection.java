@@ -19,7 +19,6 @@ import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.util.Log;
 
-import com.mohdroid.mqttv5.client.service.MessageStore.StoredMessage;
 
 import org.eclipse.paho.mqttv5.client.DisconnectedBufferOptions;
 import org.eclipse.paho.mqttv5.client.IMqttDeliveryToken;
@@ -353,10 +352,10 @@ class MqttConnection implements MqttCallback {
      * have already purged any such messages from our messageStore.
      */
     private void deliverBacklog() {
-        Iterator<StoredMessage> backlog = service.messageStore
+        Iterator<MessageStore.StoredMessage> backlog = service.messageStore
                 .getAllArrivedMessages(clientHandle);
         while (backlog.hasNext()) {
-            StoredMessage msgArrived = backlog.next();
+            MessageStore.StoredMessage msgArrived = backlog.next();
             Bundle resultBundle = messageToBundle(msgArrived.getMessageId(),
                     msgArrived.getTopic(), msgArrived.getMessage());
             resultBundle.putString(MqttServiceConstants.CALLBACK_ACTION,
