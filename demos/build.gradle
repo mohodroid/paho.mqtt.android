@@ -29,9 +29,8 @@ android {
 }
 
 dependencies {
+    api project(path: ':core')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.eclipse.paho:org.eclipse.paho.mqttv5.client:1.2.5"
-
-    implementation project(':core')
 
 }
