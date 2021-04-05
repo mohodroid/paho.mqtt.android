@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.mohdroid.android.mqtt5.client.core.MqttAndroidClient;
+import com.mohdroid.android.mqtt5.client.core.MqttService;
 import com.mohdroid.android.mqtt5.client.core.MqttTraceHandler;
 
 import org.eclipse.paho.mqttv5.client.DisconnectedBufferOptions;
@@ -25,12 +26,11 @@ import org.eclipse.paho.mqttv5.common.packet.MqttProperties;
 public class ExampleActivity extends Activity {
 
     private static final String TAG = "ExampleActivity";
-
     private String clientId = "exampleClientId";
     private final String subscriptionTopic = "exampleTopic";
     private final String publishTopic = "exampleTopic";
     private String publishMessage = "publishMessage";
-    private final String serverUri = "tcp://test.mosquitto.org:1883\"";
+    private final String serverUri = "tcp://192.168.0.249:1883";
     private MqttAndroidClient mqttAndroidClient;
 
     //widget
@@ -187,7 +187,7 @@ public class ExampleActivity extends Activity {
 
         @Override
         public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-            Log.d(TAG, "success connect to server: " + serverUri);
+            Log.d(TAG, "failed connect to server: " + serverUri + "cause by " + exception.getMessage());
             enableBtnPublish(false);
         }
     }

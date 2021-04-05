@@ -3,5 +3,5 @@ include ':core'
 //include ':org.eclipse.paho.android.sample'
 
 //project(':org.eclipse.paho.android.sample').projectDir = new File('org.eclipse.paho.android.sample')
-project(':core').projectDir = new File('core')
-project(':demos').projectDir = new File('demos')
+//project(':core').projectDir = new File('core')
+//project(':demos').projectDir = new File('demos')
