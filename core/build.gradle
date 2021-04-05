@@ -18,6 +18,11 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     dexOptions {
         preDexLibraries = false
     }
@@ -36,9 +41,9 @@ configurations {
 }
 
 dependencies {
-    compile "org.eclipse.paho:org.eclipse.paho.mqttv5.client:1.2.5"
-    compile "com.android.support:support-v4:${rootProject.ext.supportLibVersion}"
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.eclipse.paho:org.eclipse.paho.mqttv5.client:1.2.5"
+//    compile "androidx.legacy:legacy-support-v4:1.0.0"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
 }
 
 android.libraryVariants.all { variant ->
@@ -84,7 +89,7 @@ task("generateLibraryJar", type: Jar) {
 }
 
 // Generate Javadoc
-task("generateJavaDocJar", type: Jar, dependsOn: (rootProject.ext.serviceVersion.endsWith('-SNAPSHOT') ? 'generatedebugJavadoc' : 'generatereleaseJavadoc')){
+task("generateJavaDocJar", type: Jar, dependsOn: (rootProject.ext.serviceVersion.endsWith('-SNAPSHOT') ? 'generatedebugJavadoc' : 'generatereleaseJavadoc')) {
     from("$buildDir/docs/javadoc")
     classifier = 'javadoc'
 }
@@ -119,10 +124,10 @@ publishing {
 
 
 task debug << {
-    configurations.compile.each { println it}
+    configurations.compile.each { println it }
 }
 // Required to bundle Java library Jar in AAR
-clean.doLast{
+clean.doLast {
     copyLibs.execute()
 }
 assemble.doLast {
