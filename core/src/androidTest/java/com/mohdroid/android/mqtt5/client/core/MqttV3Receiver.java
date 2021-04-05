@@ -10,7 +10,7 @@
  * and the Eclipse Distribution License is available at
  *   http://www.eclipse.org/org/documents/edl-v10.php.
  */
-package com.mohdroid.android.mqtt5.core;
+package com.mohdroid.android.mqtt5.client.core;
 
 import android.util.Log;
 

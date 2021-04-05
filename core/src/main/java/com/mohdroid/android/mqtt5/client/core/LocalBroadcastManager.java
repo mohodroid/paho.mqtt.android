@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mohdroid.android.mqtt5.core;
+package com.mohdroid.android.mqtt5.client.core;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;

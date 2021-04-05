@@ -13,7 +13,7 @@
 
     <application>
         <!-- Mqtt Service -->
-        <service android:name="com.mohdroid.android.mqtt5.core.MqttService" >
+        <service android:name="com.mohdroid.android.mqtt5.client.core.MqttService" >
         </service>
 
     </application>

@@ -14,7 +14,7 @@
  *   Ian Craggs - ack control (bug 472172)
  *
  */
-package com.mohdroid.android.mqtt5.core;
+package com.mohdroid.android.mqtt5.client.core;
 
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;

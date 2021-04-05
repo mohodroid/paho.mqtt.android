@@ -13,7 +13,7 @@
  *   Contributors:
  *     James Sutton - Removing SQL Injection vunerability (bug 467378)
  */
-package com.mohdroid.android.mqtt5.core;
+package com.mohdroid.android.mqtt5.client.core;
 
 import android.content.ContentValues;
 import android.content.Context;

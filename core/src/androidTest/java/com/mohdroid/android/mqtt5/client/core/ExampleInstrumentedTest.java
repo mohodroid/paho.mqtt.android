@@ -1,4 +1,4 @@
-package com.mohdroid.android.mqtt5.core;
+package com.mohdroid.android.mqtt5.client.core;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -20,6 +20,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.mohdroid.android.mqtt5.core.test", appContext.getPackageName());
+        assertEquals("com.mohdroid.android.mqtt5.client.core.test", appContext.getPackageName());
     }
 }

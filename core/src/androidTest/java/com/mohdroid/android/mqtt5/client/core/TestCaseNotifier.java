@@ -1,4 +1,4 @@
-package com.mohdroid.android.mqtt5.core;
+package com.mohdroid.android.mqtt5.client.core;
 
 class TestCaseNotifier {
 

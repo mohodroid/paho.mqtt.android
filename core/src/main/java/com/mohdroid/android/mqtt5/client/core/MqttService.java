@@ -1,4 +1,4 @@
-package com.mohdroid.android.mqtt5.core;
+package com.mohdroid.android.mqtt5.client.core;
 
 import android.annotation.SuppressLint;
 import android.app.Service;
