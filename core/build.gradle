@@ -44,6 +44,7 @@ dependencies {
     implementation "org.eclipse.paho:org.eclipse.paho.mqttv5.client:1.2.5"
 //    compile "androidx.legacy:legacy-support-v4:1.0.0"
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
 }
 
 android.libraryVariants.all { variant ->

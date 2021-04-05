@@ -26,6 +26,8 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.util.SparseArray;
 
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import org.eclipse.paho.mqttv5.client.DisconnectedBufferOptions;
 import org.eclipse.paho.mqttv5.client.IMqttAsyncClient;
 import org.eclipse.paho.mqttv5.client.IMqttDeliveryToken;
@@ -93,7 +95,7 @@ public class MqttAndroidClient extends BroadcastReceiver implements IMqttAsyncCl
         MANUAL_ACK
     }
 
-    private static final String SERVICE_NAME = "com.mohdroid.mqttv5.client.service.MqttService";
+    private static final String SERVICE_NAME = "com.mohdroid.android.mqtt5.client.core.MqttService";
 
     private static final int BIND_SERVICE_FLAG = 0;
 
