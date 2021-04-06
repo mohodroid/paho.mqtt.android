@@ -217,5 +217,13 @@ public class ExampleActivity extends Activity {
         }
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try {
+            mqttAndroidClient.disconnect();
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+    }
 }
